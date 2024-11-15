@@ -1,0 +1,1 @@
+This study investigated soleus motor neuron excitability by comparing estimates of persistent inward currents (ΔFs), brace height, attenuation slopes, and motor unit firing rates between runners with and without mid-portion AT.
