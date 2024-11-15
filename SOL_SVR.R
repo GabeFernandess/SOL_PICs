@@ -16,7 +16,7 @@ library(patchwork)
 library(ggbeeswarm)
 
 
-sol <-read_excel("C:/Users/gabep/OneDrive/Research projects/Study 2b - PIC/SOL_AT.xlsx")
+sol <- read_excel("SOL_AT.xlsx")
 
 colnames(sol)
 
@@ -86,7 +86,7 @@ fit_deltaf1 <- lmer(dfk_ratio ~ as.factor(group) + contraction+(1 | participant/
 fit_deltaf2 <- lmer(dfk_ratio ~ as.factor(group) + age +(1| participant/mu_id), sol)
 
 #Check for best model
-anova(fit_deltaf1,fit_deltaf2,fit_deltaf3)
+anova(fit_deltaf1,fit_deltaf2)
 
 #Best model---
 fit_deltafk <- fit_deltaf2 # no influence from age or rec - not used in model
@@ -165,10 +165,9 @@ ggsave(file = "deltafK_ratio.tiff", units="in", width = 6.5, height = 7.5, dpi =
 
 fit_deltaf1 <- lmer(df ~ as.factor(group) + rec +age +contraction+(1 | participant/mu_id), sol)
 fit_deltaf2 <- lmer(df ~ as.factor(group) + age +(1| participant/mu_id), sol)
-fit_deltaf3 <- lmer(df ~ as.factor(group) + (1 | participant/mu_id), sol)
 
 #Check for best model
-anova(fit_deltaf1,fit_deltaf2,fit_deltaf3)
+anova(fit_deltaf1,fit_deltaf2)
 
 #Best model---
 fit_deltaf <- fit_deltaf2 # no diff in age or rec or contraction - not used in model
@@ -316,15 +315,8 @@ ggsave(file = "BH_TA_v1_2.tiff", units="in", width = 6.5, height = 7.5, dpi = 30
 # ATTenuation ---
 
 
-fit_att1<- lmer(att~ as.factor(group) + peak_dr_rec +(1 | participant/mu_id), sol)
-fit_att2<- lmer(att~ as.factor(group) +(1 | participant/mu_id), sol)
+fit_att<- lmer(att~ as.factor(group) + peak_dr_rec +(1 | participant/mu_id), sol)
 
-
-#Check for best model
-anova(fit_att1,fit_att2)
-
-#Best model---
-fit_att <- fit_att1
 
 summary(fit_att)
 
@@ -395,7 +387,7 @@ ggsave(file = "ATT.tiff", units="in", width = 6.5, height = 7.5, dpi = 300, comp
 
 # peak FR ----
 
-fit_dr<- lmer(peakdr ~ as.factor(group) + contraction+(1 | participant/mu_id), sol) 
+fit_dr<- lmer(peakdr ~ as.factor(group) + contraction+ rec+(1 | participant/mu_id), sol) 
 
 
 summary(fit_dr)
@@ -885,4 +877,5 @@ v2 +
 
 
 ggsave(file = "combined_plott2c.tiff", units="in", width = 9.5, height = 9, dpi = 300, compression = "lzw")
+
 
